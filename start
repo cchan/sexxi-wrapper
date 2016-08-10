@@ -1,22 +1,17 @@
 # Fetch the website (will fail if already exists)
 git clone git@github.com:sexxis/website
 
-cd website
 
-# Update the website
-git pull
+# Update and init the contents
+./update
 
-# Set up the server
-npm install
-npm run clean
-npm run build
 
 # Set up reverse proxy ports
 curl localhost:10000/unregister/sexxi.xyz
 curl localhost:10000/register/sexxi.xyz/4200
 
-# Run it on pm2, and set it to update whenever git does
-pm2 start src/server.js --name=sexxi.xyz --watch
+curl localhost:10000/unregister/sexxi.clive.io
+curl localhost:10000/register/sexxi.clive.io/61792
 
 # Run the update server 
 pm2 start server.js --name=sexxi-update

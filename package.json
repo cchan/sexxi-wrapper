@@ -1,0 +1,23 @@
+{
+  "name": "sexxi-watch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cchan/sexxi-watch.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cchan/sexxi-watch/issues"
+  },
+  "homepage": "https://github.com/cchan/sexxi-watch#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "helmet": "^2.1.2"
+  }
+}

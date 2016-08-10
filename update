@@ -1,0 +1,12 @@
+cd website
+
+# Update the website
+git pull
+
+# Set up the server
+npm install
+npm run clean
+npm run build
+
+cd ..
+
