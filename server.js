@@ -1,6 +1,6 @@
-let express = require('express');
-let app = express();
-let cp = require('child_process');
+var express = require('express');
+var app = express();
+var cp = require('child_process');
 
 app.use(require('helmet'));
 
@@ -12,19 +12,24 @@ function update(){
     website.disconnect();
   }
 
-  cp.execSync('./update');
+  console.log(cp.execSync('./update').toString());
 
-  website = cp.fork('website/src/server.js', function(err, stdout, stderr){
-    console.log('stdout: ' + stdout);
-    console.log('stderr: ' + stderr);
-    if(err)
-      console.log('exec err: ' + err);
-    res.send('done');
+  website = cp.fork('./website/src/server.js', [], { silent: true });
+
+  website.stdout.on('data', function (data) {
+    console.log('[child] stdout: ' + data.toString());
   });
 
-  website.stdout.pipe(process.stdout);
-  website.stderr.pipe(process.stderr);
-});
+  website.stderr.on('data', function (data) {
+    console.log('[child] stderr: ' + data.toString());
+  });
+
+  website.on('exit', function (code) {
+    console.log('child process exited with code ' + code.toString());
+    website.disconnect()
+    website = undefined;
+  });
+}
 
 app.post('/update', update);
 
