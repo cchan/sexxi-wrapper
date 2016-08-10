@@ -29,6 +29,6 @@ function update(){
 app.post('/update', update);
 
 app.listen('61792', 'localhost', function(){
-  console.log('[watcher] listening 61792');
+  console.log('[wrapper] listening 61792');
   update();
 });

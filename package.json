@@ -1,5 +1,5 @@
 {
-  "name": "sexxi-watch",
+  "name": "sexxi-wrapper",
   "version": "1.0.0",
   "description": "",
   "main": "",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cchan/sexxi-watch.git"
+    "url": "git+https://github.com/cchan/sexxi-wrapper.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cchan/sexxi-watch/issues"
+    "url": "https://github.com/cchan/sexxi-wrapper/issues"
   },
-  "homepage": "https://github.com/cchan/sexxi-watch#readme",
+  "homepage": "https://github.com/cchan/sexxi-wrapper#readme",
   "dependencies": {
     "express": "^4.14.0",
     "helmet": "^2.1.2"
