@@ -1,11 +1,6 @@
 # Fetch the website (will fail if already exists)
 git clone git@github.com:sexxis/website
 
-
-# Update and init the contents
-./update
-
-
 # Set up reverse proxy ports
 curl localhost:10000/unregister/sexxi.xyz
 curl localhost:10000/register/sexxi.xyz/4200
