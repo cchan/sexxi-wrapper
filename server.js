@@ -42,7 +42,8 @@ app.post('/update', function(req, res){
   res.send('done');
 });
 
-app.listen(61792, 'localhost', function(){
-  console.log('[wrapper] listening 61792');
+//(app.listen returns the auto-created HTTP server)
+var listener = app.listen(process.env.PORT, 'localhost', function(){
+  console.log('[wrapper] listening on %s:%s', listener.address().address, listener.address().port);
   update();
 });
