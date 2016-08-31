@@ -9,14 +9,14 @@ var http = require('http');
 app.use(bodyParser.json({verify:function(req,res,buf){
   console.log('Received GitHub webhook call');
   if(req.header('X-GitHub-Event') != 'push')
-    throw new Error('Not a push event, ignoring');
+    throw 'Not a push event, ignoring';
   if(req.header('X-Hub-Signature') == crypto.createHmac('sha256', secret).update(buf).digest('hex'))
-    throw new Error('Hmac validation failed, ignoring');
+    throw 'Hmac validation failed, ignoring';
 }})); // http://stackoverflow.com/a/25511885
 
 app.post('/update', function(req, res){
   if(req.body.ref != 'refs/heads/master')
-    return console.error('Not a push to master, ignoring');
+    return next('Not a push to master, ignoring');
   
   update();
   
@@ -57,7 +57,7 @@ function update(){
 }
 
 app.use(function(err, req, res, next){
-  console.error(err.message);
+  console.error(err);
   res.status(500).end(http.STATUS_CODES[500]);
 });
 
