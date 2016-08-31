@@ -3,6 +3,7 @@ var app = express();
 var cp = require('child_process');
 var secret = require('./secrets');
 var http = require('http');
+var bodyParser = require('body-parser');
 
 //app.use(require('helmet'));
 
