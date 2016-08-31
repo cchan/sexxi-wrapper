@@ -1,11 +1,30 @@
 var express = require('express');
 var app = express();
 var cp = require('child_process');
+var secret = require('./secrets');
+var http = require('http');
 
 //app.use(require('helmet'));
 
-var website;
+app.use(bodyParser.json({verify:function(req,res,buf){
+  console.log('Received GitHub webhook call');
+  if(req.header('X-GitHub-Event') != 'push')
+    throw new Error('Not a push event, ignoring');
+  if(req.header('X-Hub-Signature') == crypto.createHmac('sha256', secret).update(buf).digest('hex'))
+    throw new Error('Hmac validation failed, ignoring');
+}})); // http://stackoverflow.com/a/25511885
 
+app.post('/update', function(req, res){
+  if(req.body.ref != 'refs/heads/master')
+    return console.error('Not a push to master, ignoring');
+  
+  update();
+  
+  console.log('done updating');
+  res.status(200).end(http.STATUS_CODES[200]);
+});
+
+var website;
 function update(){
   console.log("updating");
 
@@ -37,9 +56,9 @@ function update(){
   });
 }
 
-app.post('/update', function(req, res){
-  update();
-  res.send('done');
+app.use(function(err, req, res, next){
+  console.error(err.message);
+  res.status(500).end(http.STATUS_CODES[500]);
 });
 
 //(app.listen returns the auto-created HTTP server)
