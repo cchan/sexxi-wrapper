@@ -1,9 +1,10 @@
-var express = require('express');
-var app = express();
-var cp = require('child_process');
-var secret = require('./secrets');
-var http = require('http');
-var bodyParser = require('body-parser');
+let express = require('express');
+let app = express();
+let cp = require('child_process');
+let secret = require('./secrets');
+let http = require('http');
+let bodyParser = require('body-parser');
+let crypto = require('crypto');
 
 //app.use(require('helmet'));
 
