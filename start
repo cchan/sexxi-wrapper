@@ -2,7 +2,7 @@
 git clone git@github.com:sexxis/website
 
 # Set up reverse proxy port
-router register sexxi.xyz 4200
+router register --domain sexxi.xyz --port 4200
 
 # Run the update server (which will fork a sexxi.xyz process)
-router create sexxi.clive.io
+router create --domain sexxi.clive.io
